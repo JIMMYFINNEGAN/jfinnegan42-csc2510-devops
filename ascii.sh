@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "\e[34m"
+echo -e "\e[31m"
 echo "        ^"
 echo "       / \\"
 echo "      / _ \\"
