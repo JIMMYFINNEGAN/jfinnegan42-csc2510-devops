@@ -1,1 +1,1 @@
-cat
+Bob likes cats.
