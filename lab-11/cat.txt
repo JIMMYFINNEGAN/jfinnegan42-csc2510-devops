@@ -1,1 +1,1 @@
-cat
+Alice likes cats.
