@@ -1,0 +1,49 @@
+---
+- hosts: all
+  become: no
+  become_method: sudo
+
+  tasks:
+    - name: Install python3-apt
+      become: yes
+      apt:
+        name: python3-apt
+        state: present
+        update_cache: yes
+
+    - name: Install apache2
+      become: yes
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copy apache config
+      become: yes
+      copy:
+        src: files/config/apache.conf
+        dest: /etc/apache2/apache2.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Copy index.html
+      become: yes
+      copy:
+        src: files/site/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Create symbolic link
+      become: yes
+      file:
+        src: /etc/apache2/sites-available/000-default.conf
+        dest: /etc/apache2/sites-enabled/000-default.conf
+        state: link
+
+    - name: Restart apache2
+      become: yes
+      service:
+        name: apache2
+        state: restarted
